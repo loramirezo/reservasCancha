@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Formulario de Registro</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+      crossorigin="anonymous">
+    <style>
+      body {
+        background-color: #183054;
+      }
+      .form-container {
+        background-color: white;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.75);
+        margin-top: 50px;
+        max-width: 500px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      {% if r %}
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+          <strong>{{r}}</strong>
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>        
+		  {% endif %}
+      <div class="row justify-content-center">
+        <div class="col-md-8 form-container">
+          <h2 class="text-center mb-4">Registro</h2>
+          <form action="/insertarregistroclientes" method="post">
+            {% csrf_token %}
+            <div class="form-group">
+              <label for="documento">Documento:</label>
+              <input type="number" class="form-control" id="documento" name="documento" required>
+            </div>
+            <div class="form-group">
+              <label for="nombre">Nombre:</label>
+              <input type="text" class="form-control" id="nombre" name="nombre" required>
+            </div>
+            <div class="form-group">
+              <label for="apellido">Apellido:</label>
+              <input type="text" class="form-control" id="apellido" name="apellido" required>
+            </div>
+            <div class="form-group">
+              <label for="direccion">Dirección:</label>
+              <input type="text" class="form-control" id="direccion" name="direccion" required>
+            </div>
+            <div class="form-group">
+              <label for="correo">Correo Electrónico:</label>
+              <input type="email" class="form-control" id="correo" name="correo_electronico" required>
+            </div>
+            <div class="form-group">
+              <label for="contrasena">Contraseña:</label>
+              <input type="password" class="form-control" id="contrasena" name="contrasena" required>
+            </div>
+            <div class="text-center">
+              <button type="submit" class="btn btn-primary mr-3">Registrarse</button>
+              <a href="/" class="btn btn-secondary">Regresar</a>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+      integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+      crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Q1Q2St/iB/SQ0txMFn7uF2WWZF2M7xXGdqz0w7jRMkipc8dA7N8l7fRA"
+      crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+      integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+      crossorigin="anonymous"></script>
+  </body>
+</html>

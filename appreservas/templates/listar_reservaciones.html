@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Formulario con Tabla</title>
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <style>
+    body {
+      background-color: #183054;
+    }
+
+    .card {
+      margin: 50px auto;
+      width: 90%;
+      max-width: 1000px;
+    }
+
+
+    .form-control:focus {
+      border-color: #17A2B8;
+      box-shadow: none;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    {% if r %}
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+      <strong>{{r}}</strong>
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    {% endif %}
+    <div class="card">
+      <div class="card-body">
+        <h2 class="card-title text-center mb-4">Lista de Reservaciones</h2>
+        <a href="/mostrarprincipal" class="btn btn-sm btn-info">Regresar</a>
+        <div class="form-row">
+          <div class="form-group col-md-3">
+            <label for="campo-busqueda">Buscar por:</label>
+            <select class="form-control" id="columna" name="columna">
+              <option value="r.id">Codigo</option>
+              <option value="can.nombre">Cancha</option>
+              <option value="cli.nombre">Cliente</option>
+              <option value="r.fecha_inicio">Fecha Inicio</option>
+              <option value="r.fecha_fin">Fecha Fin</option>
+            </select>
+          </div>
+          <div class="form-group col-md-6">
+            <label for="valor-busqueda">Valor:</label>
+            <input type="text" class="form-control" id="busqueda" name="busqueda">
+          </div>
+          <div class="form-group col-md-3">
+            <button class="btn btn-primary btn-block" id="Registrar"
+              onclick="location.href='/horasenfechausuario/{{ factual }}/1'">Registrar</button>
+            <button class="btn btn-primary btn-block" id="buscar"
+              onclick="location.href='/filtrarreservaciones/'+(document.getElementById('busqueda').value ? document.getElementById('busqueda').value : 'ninguno')+'/'+document.getElementById('columna').value;">Buscar</button>
+          </div>
+        </div>
+        <div class="table-responsive col">
+          <table class="table table-bordered table-hover mt-4">
+            <thead>
+              <tr>
+                <th>Codigo</th>
+                <th>Usuario</th>
+                <th>Cancha</th>
+                <th>Cliente</th>
+                <th>Arbitro</th>
+                <th>Fecha Inicio</th>
+                <th>Fecha Fin</th>
+                <th>Total</th>
+                <th>Total con descuento</th>
+                <th>Justificacion</th>
+                <th>Cancelación</th>
+              </tr>
+            </thead>
+            {% for x in datosres%}
+            <tbody>
+              <tr>
+                <td>{{x.0}}</td>
+                <td>{{x.11}}</td>
+                <td>{{x.9}}</td>
+                <td>{{x.10}}</td>
+                <td>{{x.8}}</td>
+                <td>{{x.1}}</td>
+                <td>{{x.2}}</td>
+                <td>{{x.4}}</td>
+                <td>{{x.3}}</td>
+                <td>{{x.5}}</td>
+                <td>
+                  <a href="/eliminarreservaciones/{{x.0}}" class="btn btn-sm btn-danger"
+                    onclick="return confirm('¿Estás seguro de que deseas eliminar este registro?')">Eliminar</a>
+                </td>
+              </tr>
+            </tbody>
+            {% endfor %}
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+    crossorigin="anonymous"></script>
+</body>
+
+</html>

@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Registro de Reservacion</title>
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <style>
+    body {
+      background-color: #183054;
+    }
+
+    .card {
+      margin: 50px auto;
+      width: 90%;
+      max-width: 800px;
+    }
+
+    .form-control:focus {
+      border-color: #ADD8E6;
+      box-shadow: none;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    {% if r %}
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+      <strong>{{r}}</strong>
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    {% endif %}
+    <div class="card">
+      <div class="card-body">
+        <h2 class="card-title text-center mb-4">Registro de Reservaciones</h2>
+
+        <form action="/insertarreservacionesusuarios/{{ canchita }}/{{ factual }}" method="post">
+          {% csrf_token %}
+          <div class="form-group">
+            <label for="arbitro">Arbitro:</label>
+            <select class="form-control" id="arbitro" name="arbitro" onchange="document.getElementById('total').value = parseFloat({{ ttotal }}) + parseFloat(this.options[this.selectedIndex].dataset.costo || 0)">
+              <option value="Sin Arbitro" data-costo="0">Sin Arbitro - 0</option>
+              {% for x in arb %}
+              <option value="{{ x.documento }}" data-costo="{{ x.costo }}">{{ x.nombre }} - {{ x.costo }}</option>
+              {% endfor %}
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="cliente">Cliente:</label>
+            <select class="form-control" id="cliente" name="cliente">
+              {% for x in cli %}
+              <option value="{{ x.documento }}">{{ x.nombre }} - {{ x.apellido }}</option>
+              {% endfor %}
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="fechainicio">Hora Inicio</label>
+            <input type="text" class="form-control" id="fechainicio" name="fechainicio" placeholder="Fecha Inicio" value="{{hhora}}" readonly>
+          </div>
+          <div class="form-group">
+            <label for="fechafin">Horas a reservar:</label>
+            <input type="number" class="form-control" id="fechafin" name="fechafin" placeholder="Horas a reservar"
+              oninput="calcularTotal()">
+          </div>
+          <div class="form-group">
+            <label for="total">Total</label>
+            <input type="number" class="form-control" id="total" name="total" value="{{ ttotal }}" placeholder="0.00"
+              readonly>
+          </div>
+          <div class="form-group">
+            <label for="Justificacion">Justificacion</label>
+            <input type="text" class="form-control" id="justificacion" name="justificacion" placeholder="Justificacion">
+          </div>
+          <div class="form-group">
+            <button type="submit" class="btn btn-primary mr-2">Registrar</button>
+            <button type="button" class="btn btn-secondary"
+              onclick="location.href='/mostrarlistarreservacionesusuario/{{ factual }}/ {{canchita}}'">Regresar</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <!-- Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi4jq7W"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+    crossorigin="anonymous"></script>
+
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+    crossorigin="anonymous"></script>
+    <script>
+      function sumarCosto() {
+        var select = document.getElementById('arbitro');
+        var opcionSeleccionada = select.options[select.selectedIndex];
+        var costoSeleccionado = opcionSeleccionada.dataset.costo || 0;
+        var valorBase = parseFloat("{{ ttotal }}") || 0;
+        var total = valorBase + parseFloat(costoSeleccionado);
+      }
+    </script>
+
+<script>
+  function calcularTotal() {
+    const selectcombo = document.getElementsByName("arbitro")[0];
+    const horasAReservar = document.getElementById("fechafin").value;
+    const precioPorHora = document.getElementById("total").value; // Precio por hora
+    const total = horasAReservar * precioPorHora;
+      if (total>0) {
+      document.getElementById("total").value = total;
+      } 
+      if (!horasAReservar) {
+        document.getElementById("total").value = {{ttotal}};
+        selectcombo.selectedIndex = 0;
+      }
+  }
+</script>
+</body>
+
+</html>

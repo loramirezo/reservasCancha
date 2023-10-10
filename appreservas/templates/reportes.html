@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Reportes</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <style>
+    body {
+      background-color: #183054;
+      /* Cambia el color de fondo del body */
+    }
+
+    .panel {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      padding: 20px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      background-color: white;
+    }
+
+    .form-group {
+      margin-bottom: 15px;
+    }
+
+    .btn {
+      margin-right: 10px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="panel">
+    <div class="form-group">
+      <label for="selectAno">Año:</label>
+      <select id="anho" class="form-control">
+        {% for x in anho %}
+        <option value="{{x.0}}">{{x.0}}</option>
+        {% endfor %}
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="selectMes">Mes:</label>
+      <select id="mes" class="form-control">
+        {% for x in meses %}
+        <option value="{{ x.0 }}">
+          {% if x.0 == 1 %}
+          Enero
+          {% elif x.0 == 2 %}
+          Febrero
+          {% elif x.0 == 3 %}
+          Marzo
+          {% elif x.0 == 4 %}
+          Abril
+          {% elif x.0 == 5 %}
+          Mayo
+          {% elif x.0 == 6 %}
+          Junio
+          {% elif x.0 == 7 %}
+          Julio
+          {% elif x.0 == 8 %}
+          Agosto
+          {% elif x.0 == 9 %}
+          Septiembre
+          {% elif x.0 == 10 %}
+          Octubre
+          {% elif x.0 == 11 %}
+          Noviembre
+          {% else %}
+          Diciembre
+          {% endif %}
+        </option>
+        {% endfor %}
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="selectCancha">Cancha:</label>
+      <select id="cancha" class="form-control">
+        {% for x in can %}
+        <option value="{{x.id}}">{{x.nombre}}</option>
+        {% endfor %}
+      </select>
+    </div>
+    <div class="form-group">
+      <label>Ingresos sin promoción:</label>
+      <span id="ingresosSinPromocion">{{resultados.0.0}}</span>
+    </div>
+    <div class="form-group">
+      <label>Ingresos con promoción:</label>
+      <span id="ingresosConPromocion">{{resultados.0.1}}</span>
+    </div>
+    <div class="form-group">
+      <label>Cantidad de reservas activas:</label>
+      <span id="reservasActivas">{{resultados.0.2}}</span>
+    </div>
+    <div class="form-group">
+      <label>Cantidad de reservas canceladas:</label>
+      <span id="reservasCanceladas">{{resultados.0.3}}</span>
+    </div>
+    <button id="calcular" class="btn btn-primary" onclick="location.href='/calcularresultados/'+document.getElementById('anho').value+'/'+document.getElementById('mes').value+'/'+document.getElementById('cancha').value;">Calcular</button>
+    <button id="regresar" class="btn btn-secondary" onclick="location.href='/mostrarprincipal'">Regresar</button>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper"></script>
+  <script src=" https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+
+</html>

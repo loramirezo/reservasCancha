@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+    body {
+        background-color: #183054;
+        font-family: Arial, sans-serif;
+        text-align: center;
+    }
+
+    .container {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+    }
+
+    .panel {
+        background-color: white;
+        padding: 20px;
+        border-radius: 10px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .button {
+        width: 250px;
+        height: 50px;
+        margin-bottom: 15px;
+        background-color: #4a90e2;
+        border: none;
+        color: white;
+        font-size: 18px;
+        cursor: pointer;
+        border-radius: 10px;
+        border: 2px solid #2979c9;
+        transition: background-color 0.3s ease;
+    }
+
+    .button:hover {
+        background-color: #2979c9;
+    }
+</style>
+</head>
+<body>
+    <div class="container">
+        <div class="panel">
+            <button class="button" 	                  
+            onclick="location.href='/mostrarlistarclientes'">Gestionar Cliente</button>
+            <button class="button"
+            onclick="location.href='/mostrarlistarusuarios'">Gestionar Usuario</button>
+            <button class="button"
+            onclick="location.href='/mostrarlistarescenarios'">Gestionar Cancha</button>
+            <button class="button"
+            onclick="location.href='/mostrarlistararbitros'">Gestionar Arbitro</button>
+            <button class="button"
+            onclick="location.href='/mostrarlistarpromociones'">Gestionar Promociones</button>
+            <button class="button"
+            onclick="location.href='/mostrarlistarreservaciones'">Gestionar Reservaciones</button>
+	         <button class="button"
+             onclick="location.href='/mostrarreportes'">Reportes</button>
+	         <button class="button"
+           onclick="location.href='/'">Salir</button>
+        </div>
+    </div>
+</body>
+</html>
