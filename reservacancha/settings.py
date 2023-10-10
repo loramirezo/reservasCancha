@@ -73,13 +73,16 @@ WSGI_APPLICATION = 'reservacancha.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
+#mysql://root:@:8018/railway
 
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'reservas',
+        'NAME': 'railway',
         'USER':'root',
-        'PASSWORD':''
+        'HOST':'containers-us-west-45.railway.app',
+        'PASSWORD':'L0uy8o6bpO7jZuRMKlJj',
+        'PORT':'8018'
     }
 }
 
