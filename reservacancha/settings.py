@@ -45,7 +45,7 @@ INSTALLED_APPS = [
     'appreservas'
 ]
 
-CSRF_TRUSTED_ORIGINS=['https://reservacanchas.up.railway.app/']
+CSRF_TRUSTED_ORIGINS=['reservacanchas.up.railway.app']
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
