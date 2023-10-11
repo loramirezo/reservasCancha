@@ -30,7 +30,7 @@ SECRET_KEY = 'django-insecure-3t@0v)=&fu!6h3_2o#=-yzfws8$-)k&3akj1-cw46ruk30c%q6
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['https://reservacanchas.up.railway.app/','0.0.0.0']
 
 
 # Application definition
@@ -44,6 +44,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'appreservas'
 ]
+
+CSRF_TRUSTED_ORIGINS=['https://reservacanchas.up.railway.app/']
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
